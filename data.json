@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "IPL",
+        "date": "2023-03-22",
+        "location":"chennai",
+        "team1":"chennai super kings",
+        "team2":"Delhi capitals",
+        "status": "Live" 
+    },
+    {
+        "id": 2,
+        "name": "IPL",
+        "date": "2023-03-22",
+        "location":"chennai",
+        "team1":"Koikata Knight Riders",
+        "team2":"Gujarat Titans",
+        "status": "End" 
+    },
+    {
+        "id": 3,
+        "name": "IPL",
+        "date": "2023-03-22",
+        "location":"chennai",
+        "team1":"Mumbai Indians",
+        "team2":"Lucknow Super Giants",
+        "status": "Upcoming" 
+    },
+    {
+        "id": 4,
+        "name": "IPL",
+        "date": "2023-03-22",
+        "location":"chennai",
+        "team1":"Punjab Kings",
+        "team2":"Rajasthan Royals",
+        "status": "End" 
+    },
+    {
+        "id": 5,
+        "name": "IPL",
+        "date": "2023-03-22",
+        "location":"chennai",
+        "team1":"Royal Challengers Bangalore",
+        "team2":"Sunrisers Hyderabad",
+        "status": "Upcoming" 
+    },
+    {
+        "id": 6,
+        "name": "IPL",
+        "date": "2023-03-22",
+        "location":"chennai",
+        "team1":"Koikata Knight Riders",
+        "team2":"Gujarat Titans",
+        "status": "End" 
+    }
+]
