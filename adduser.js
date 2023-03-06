@@ -15,15 +15,20 @@ const Adding = (props)=>{
    
     return(<div> 
         <Dialog open={props} >
+            <center>
         <DialogTitle >
           <center>Add The User</center></DialogTitle>
         <DialogContent  className="form-container"  >
-        <label className="labelcss">id</label>&nbsp;&nbsp;
-        <input type="text" className="inputcss"  onChange={handleinputchange} name="id" value={users.id} ></input><br/>
             <label className="labelcss">Name</label>&nbsp;&nbsp;
             <input type="text" className="inputcss" onChange={handleinputchange} name="name" value={users.name}></input><br/>
             <label className="labelcss">Date</label>&nbsp;&nbsp;
             <input type="date"onChange={handleinputchange} className="inputcss" name="date" value={users.date}></input><br/>
+            <label className="labelcss">Location</label>&nbsp;&nbsp;
+            <input type="text"onChange={handleinputchange} className="inputcss" name="location" value={users.location}></input><br/>
+            <label className="labelcss">Teamname1</label>&nbsp;&nbsp;
+            <input type="text"onChange={handleinputchange} className="inputcss" name="teamname1" value={users.teamname1}></input><br/>
+            <label className="labelcss">Teamname2</label>&nbsp;&nbsp;
+            <input type="text"onChange={handleinputchange} className="inputcss" name="teamname2" value={users.teamname2}></input><br/>
             <label className="labelcss">States</label>&nbsp;&nbsp; 
             <select  onChange={handleinputchange} className="inputcss" name="status" value={users.status} >
                 <option value="*"></option>
@@ -40,12 +45,13 @@ const Adding = (props)=>{
                 event.preventDefault();
                 props.adduser(users);
                 setuser(initialFormState);
-                }} >Update</Button>
+                }} >Save</Button>
           <Button onClick={()=>{
             props.setadding(false);
         } }>Cancel</Button>
         </center>
         </DialogContentText>
+        </center>
       </Dialog>
         </div>
     )

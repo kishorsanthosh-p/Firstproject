@@ -1,102 +1,118 @@
-import Table from "./Usertable";
-import{useState} from "react";
-import Edittable from "./Etable";
-import Deletetable from "./Deletetable";
-import Adding from "./Adduser";
-//import Deletetable from "./Deletetable";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import EditIcon from '@mui/icons-material/Edit';
+import Tooltip from '@mui/material/Tooltip';
+import { useState } from 'react';
+export default function Usertable(props,user){
+  const [order, setorder]=useState(true);
+    const Sorting =()=>{
+        var table, rows,switching , i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        if(order===true){
+        while(switching){ 
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+              shouldSwitch = false;
+              x = rows[i].getElementsByTagName("TD")[0];
+              y = rows[i + 1].getElementsByTagName("TD")[0];
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }}
+            if (shouldSwitch) {
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+            setorder(false);
+        }}
+    if(order===false){
+        while(switching ){
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+              shouldSwitch = false;
+              x = rows[i].getElementsByTagName("TD")[0];
+              y = rows[i + 1].getElementsByTagName("TD")[0];
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }}
+            if (shouldSwitch) {
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }}
+        setorder(true);
+        }}
+  return(
+    <div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" id="myTable">
+          <TableRow>
+          <TableCell align="center"><b>Id</b><UnfoldMoreIcon className='icon'  onClick={()=>Sorting("")}/></TableCell>
+          <TableCell align="center"><b>Name</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>
+          <TableCell align="center"><b>Date</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>
+          <TableCell align="center"><b>Location</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>  
+          <TableCell align="center"><b>Team1</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>
+          <TableCell align="center"><b>Team2</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>
+          <TableCell align="center"><b>Status</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>
+          <TableCell align="center"><b>Action</b><UnfoldMoreIcon className='icon' onClick={()=>Sorting("")}/></TableCell>
+            </TableRow>
+            <TableBody> 
+              {props.user.length > 0 ? (
+                props.user.map((user) => (
+                <TableRow key={user.id} align='center '>
+                  <DataTableBodyCell align="center">{user.id}</DataTableBodyCell>
+                  <DataTableBodyCell align="center">{user.name}</DataTableBodyCell>
+                  <DataTableBodyCell align="center">{user.date}</DataTableBodyCell>
+                  <DataTableBodyCell align="center">{user.location}</DataTableBodyCell>
+                  <Tooltip title={user.team1}>
+                    <DataTableBodyCell align="center">{user.teamname1}</DataTableBodyCell>
+                  </Tooltip>
+                  <Tooltip title={user.team2} align="center">
+                    <Button align="center">{user.teamname2}</Button>
+                    <DataTableBodyCell align="center">{user.teamname2}</DataTableBodyCell>
+                  </Tooltip>
+                  <DataTableBodyCell align="center">{user.status}</DataTableBodyCell>
+                  <DataTableBodyCell align="center">
+                     <Tooltip title="Edit" placement="top-end">
+                     <Button
+                     onClick={() => {
+                      props.editRow(user);
+                    }}
+                    ><EditIcon/></Button>
+                     </Tooltip>
+                     <Tooltip title="Delete" placement="top-end">
+                    <Button
+                      onClick={() => {
+                        props.deleteuser(user);
+                      }}><DeleteSweepIcon/>
+                    </Button>
+                    </Tooltip>
+                  </DataTableBodyCell>
+                </TableRow>
+              ))
+              ) : (
+              <TableRow>
+                <TableCell colSpan={5}>
+                  <center>no data</center>
+                </TableCell>
+              </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-export default function App(){
-	const userdata=[
-		{id:1,name:'aaa',date:'2023-03-22',status:'End'},
-		{id:2,name:'bbb',date:'2023-04-25',status:'Live'},
-		{id:3,name:'ccc',date:'2023-03-23',status:'Upcoming'},
-		{id:4,name:'ddd',date:'2023-02-10',status:'Live'}
-	];
-	const [adding,setadding]=useState(false);
-	const handleinputchange=()=>{
-		setadding(true);
-	   }
-	const adduser = (users)=>{
-		user.id = user.length + 1;
-		setuser([...user,users]);
-		setadding(false);
-	}
-	///delete table
-	const intialformdelete={id:""}
-	const [currentuserid,setcurrentuserid]=useState(intialformdelete);
-	const [deleteuer,setdelete]=useState(false);
-	const deleteuser = (user)=>{
-		setdelete(true); 
-		setcurrentuserid({id:user.id});
-		// setcurrentuserid(user((user)=>user.id));
-		//setuser(user.filter((user)=>user.id!==id)
-	}
-	const deleterow =(id)=>{
-		setuser(user.filter((user)=>user.id!==id));
-		setdelete(false);
-	}
+  </div>
+)
 
-	///edit table
-	const[user,setuser]=useState (userdata);
-	const [editing,setediting]=useState(false);
-	const intialformstate={id:null,name:"",date:"",status:""}
-	const [currentuser,setcurrentuser]=useState(intialformstate);
-	const editRow =(user)=>{
-		setediting(true);
-		setcurrentuser({id:user.id,name:user.name,date:user.date,status:user.status});
-	}
-	const updateuser=(id,updateuser)=>{
-		setediting(false);
-		setuser(user.map((user)=>(user.id===id?updateuser:user)));
-	}
-	return(
-		<div>
-			<button onClick={handleinputchange}>adduser</button>
-			<div>
-				{adding?(
-					<div>
-						<Adding 
-						adduser={adduser}
-						setadding={setadding}
-						
-						/>
-					</div>
-				):(
-					<div>
-					</div>
-				)
-				}
-			</div>
-			<div>
-				{editing?(<div>
-					<Edittable
-					editing={editing}
-					setediting={setediting}
-					updateuser={updateuser}
-					currentuser={currentuser }/>
-				</div>):(<div></div>)}
-        </div>
-		<div>
-			{ deleteuer?(<div>
-				<Deletetable
-				deleteuser={deleteuser}
-				deleterow={deleterow}
-				setdelete={setdelete}
-				currentuserid={currentuserid}
-				users={user}
-				/>
-			</div>):(<div>
-				
-			</div>)}
-		</div>
-			<Table 
-			editRow={editRow} 
-			deleteuser={deleteuser} 
-			user={user}/>
-			
-      <div>
-      </div>
-		</div>
-    
-	)
-} 
+}
