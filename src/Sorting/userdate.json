@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "jenith",
+        "date": "2023-03-27",
+        "location":"nazareth"
+    },
+    {
+        "id": 2,
+        "name": "ajees",
+        "date": "2023-03-26",
+        "location":"chennai"
+    },
+    {
+        "id": 3,
+        "name": "finny",
+        "date": "2023-03-23",
+        "location":"ooty"
+    },
+    {
+        "id": 4,
+        "name": "siva",
+        "date": "2023-03-20",
+        "location":"chennai"
+    }
+]
